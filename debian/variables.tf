@@ -1,7 +1,7 @@
 // Template //
 variable "template_vmid" {
   type    = number
-  default = 230
+  default = 0
 }
 
 // Cluster nodes //
@@ -12,21 +12,12 @@ variable "servers" {
     address   = string
     bootstrap = bool
   }))
-  default = {
-    "k3s-238" = {
-      vmid      = 238
-      node_name = "pve-38"
-      address   = "10.10.20.38"
-      bootstrap = true
-    }
-    "k3s-239" = {
-      vmid      = 239
-      node_name = "pve-39"
-      address   = "10.10.20.39"
-      bootstrap = false
-    }
+    validation {
+    condition     = length([for s in var.servers : s if s.bootstrap]) == 1
+    error_message = "Exactly one server must have bootstrap = true."
   }
 }
+
 // Hardware //
 variable "cpu_cores" {
   type    = number
@@ -56,18 +47,18 @@ variable "disk_datastore" {
 // Snippets live on the shared NFS storage //
 variable "snippet_datastore" {
   type    = string
-  default = "proxmox"
+  default = "local-lvm"
 }
 
 variable "snippet_node" {
   type    = string
-  default = "pve-39"
+  default = "pve-0"
 }
 
 // Network //
 variable "net_bridge" {
   type    = string
-  default = "vlan20"
+  default = "vmbr0"
 }
 
 variable "net_vlan_id" {
@@ -77,7 +68,7 @@ variable "net_vlan_id" {
 
 variable "net_gateway" {
   type    = string
-  default = "10.10.20.254"
+  default = "10.0.0.254"
 }
 
 variable "net_prefix" {
@@ -87,7 +78,7 @@ variable "net_prefix" {
 
 variable "nameservers" {
   type    = list(string)
-  default = ["10.10.20.254"]
+  default = ["10.0.0.254"]
 }
 
 // Guest account //
@@ -98,7 +89,7 @@ variable "username" {
 
 variable "ssh_public_key_file" {
   type    = string
-  default = "~/.ssh/id_ed25519.pub"
+  default = "~/.ssh/tf_id_ed25519.pub"
 }
 
 // k3s //
