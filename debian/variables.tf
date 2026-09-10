@@ -98,3 +98,8 @@ variable "k3s_token" {
   sensitive = true
   default   = ""
 }
+
+variable "template_node" {
+  type    = string
+  default = "pve-39"
+}

@@ -6,10 +6,10 @@ resource "proxmox_virtual_environment_vm" "k3s" {
   node_name = each.value.node_name
 
   clone {
-    vm_id = var.template_vmid
-    full  = true
+    vm_id     = var.template_vmid
+    node_name = var.template_node
+    full      = true
   }
-
   cpu {
     cores = var.cpu_cores
     type  = var.cpu_type
