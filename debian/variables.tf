@@ -9,6 +9,7 @@ variable "servers" {
   type = map(object({
     vmid      = number
     node_name = string
+    template_vmid = number
     address   = string
     bootstrap = bool
   }))

@@ -8,22 +8,23 @@ snippet_datastore = "proxmox"
 
 ssh_public_key_file = "~/.ssh/id_ed25519.pub"
 
+
 servers = {
   "k3s-238" = {
-    vmid      = 238
-    node_name = "pve-38"
-    address   = "10.10.20.38"
-    bootstrap = true
+    vmid          = 238
+    node_name     = "pve-38"
+    template_vmid = 938
+    address       = "10.10.20.38"
+    bootstrap     = true
   }
   "k3s-239" = {
-    vmid      = 239
-    node_name = "pve-39"
-    address   = "10.10.20.39"
-    bootstrap = false
+    vmid          = 239
+    node_name     = "pve-39"
+    template_vmid = 939
+    address       = "10.10.20.39"
+    bootstrap     = false
   }
 }
-
-template_vmid = 230
 
 username      = "admin"
 
