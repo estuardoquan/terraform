@@ -32,8 +32,13 @@ provider "proxmox" {
 
   # Snippets are uploaded over SFTP, not the HTTP API — a PAM account is
   # required. The API token cannot do this on its own.
+  #ssh {
+  #  agent    = true
+  #  username = var.proxmox_ssh_user
+  #}
+
   ssh {
-    agent    = true
-    username = var.proxmox_ssh_user
+    username    = var.proxmox_ssh_user
+    private_key = file(pathexpand(var.ssh_public_key_file))
   }
 }
