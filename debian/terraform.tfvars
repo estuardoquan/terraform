@@ -1,6 +1,6 @@
 template_vmid = 230
 username      = "admin"
-
+ssh_public_key_file = "~/.ssh/id_ed25519"
 snippet_node = "pve-39"
 snippet_datastore = "proxmox"
 
