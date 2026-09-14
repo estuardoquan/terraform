@@ -24,6 +24,7 @@ resource "proxmox_virtual_environment_file" "user_data" {
     data = templatefile("${path.module}/templates/user.yaml.tftpl", {
       hostname          = each.key
       username          = var.username
+      nameservers       = var.nameservers
       ssh_public_key    = local.ssh_public_key
       k3s_token         = local.k3s_token
       bootstrap         = each.value.bootstrap
