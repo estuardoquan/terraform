@@ -8,7 +8,6 @@ snippet_datastore = "proxmox"
 
 ssh_public_key_file = "~/.ssh/id_ed25519.pub"
 
-
 servers = {
   "k3s-238" = {
     vmid          = 238
