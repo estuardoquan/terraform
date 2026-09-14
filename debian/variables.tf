@@ -16,7 +16,7 @@ variable "servers" {
 // Hardware //
 variable "cpu_cores" {
   type    = number
-  default = 2
+  default = 4
 }
 
 variable "cpu_type" {
