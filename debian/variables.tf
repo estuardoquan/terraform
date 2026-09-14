@@ -1,9 +1,3 @@
-// Template //
-variable "template_vmid" {
-  type    = number
-  default = 0
-}
-
 // Cluster nodes //
 variable "servers" {
   type = map(object({
@@ -32,12 +26,12 @@ variable "cpu_type" {
 
 variable "memory" {
   type    = number
-  default = 4096
+  default = 8192
 }
 
 variable "disk_size" {
   type    = number
-  default = 32
+  default = 64
 }
 
 variable "disk_datastore" {
@@ -100,7 +94,3 @@ variable "k3s_token" {
   default   = ""
 }
 
-variable "template_node" {
-  type    = string
-  default = "pve-39"
-}
