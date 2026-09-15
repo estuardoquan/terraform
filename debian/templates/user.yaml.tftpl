@@ -12,14 +12,14 @@ users:
     ssh_authorized_keys:
       - ${ssh_public_key}
 
-manage_resolv_conf: true
-resolv_conf:
-  nameservers:
-%{ for ns in nameservers ~}
-    - ${ns}
-%{ endfor ~}
-
 write_files:
+  - path: /etc/resolv.conf
+    permissions: "0644"
+    owner: root:root
+    content: |
+%{ for ns in nameservers ~}
+      nameserver ${ns}
+%{ endfor ~}
   - path: /etc/rancher/k3s/config.yaml
     permissions: "0600"
     owner: root:root
