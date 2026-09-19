@@ -13,7 +13,7 @@ servers = {
     vmid          = 350
     node_name     = "pve-39"
     template_vmid = 3050
-    address       = "10.10.30.50"
+    address       = "10.10.30.200"
   }
 }
 
