@@ -6,10 +6,6 @@ variable "servers" {
     template_vmid = number
     address   = string
   }))
-    validation {
-    condition     = length([for s in var.servers : s if s.bootstrap]) == 1
-    error_message = "Exactly one server must have bootstrap = true."
-  }
 }
 
 // Hardware //
