@@ -11,12 +11,4 @@ users:
     ssh_authorized_keys:
       - ${ssh_public_key}
 
-write_files:
-  - path: /etc/resolv.conf
-    permissions: "0644"
-    owner: root:root
-    content: |
-%{ for ns in nameservers ~}
-      nameserver ${ns}
-%{ endfor ~}
 
