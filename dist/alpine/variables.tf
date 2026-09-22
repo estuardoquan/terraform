@@ -26,7 +26,7 @@ variable "memory" {
 
 variable "disk_size" {
   type    = number
-  default = 64
+  default = 16
 }
 
 variable "disk_datastore" {
