@@ -5,9 +5,8 @@ manage_etc_hosts: true
 
 users:
   - name: ${username}
-    groups: [sudo]
+    groups: [docker, wheel]
     shell: /bin/sh
-    sudo: "ALL=(ALL) NOPASSWD:ALL"
     lock_passwd: true
     ssh_authorized_keys:
       - ${ssh_public_key}
@@ -21,5 +20,3 @@ write_files:
       nameserver ${ns}
 %{ endfor ~}
 
-runcmd:
-  - [""]
