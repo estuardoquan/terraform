@@ -17,5 +17,8 @@ runcmd:
   - chown 1000:1000 -R /opt/bin /opt/services
   - find /opt/bin -type f -name '*.sh' -exec cp {} /usr/local/bin/ \;
   - ln -s /opt/services/vlan/vlan /etc/init.d/vlan
+  - ln -s /opt/services/hostname/hostname /etc/init.d/hostname
   - rc-update add vlan default
   - rc-service vlan start
+  - rc-update add hostname default
+  - rc-service hostname start
