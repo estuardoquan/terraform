@@ -16,6 +16,7 @@ resource "proxmox_virtual_environment_file" "user_data" {
       username          = var.username
       nameservers       = var.nameservers
       ssh_public_key    = local.ssh_public_key
+      nsupdate_key_secret = var.nsupdate_key_secret
     })
   }
 }
