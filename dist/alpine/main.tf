@@ -33,6 +33,7 @@ resource "proxmox_virtual_environment_vm" "alpine" {
     bridge  = var.net_bridge
     vlan_id = var.net_vlan_id
     model   = "virtio"
+    trunks  = var.net_trunks
   }
 
   initialization {

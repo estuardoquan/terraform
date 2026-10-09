@@ -1,6 +1,8 @@
 net_bridge = "vmbr0"
-net_gateway = "10.10.0.254"
-nameservers = ["10.10.0.254"]
+net_vlan_id = 30
+net_trunks = "10;20"
+net_gateway = "10.10.30.254"
+nameservers = ["10.10.30.254"]
 
 snippet_node = "pve-39"
 snippet_datastore = "proxmox"
@@ -13,7 +15,7 @@ servers = {
     vmid          = 350
     node_name     = "pve-39"
     template_vmid = 3050
-    address       = "10.10.0.50"
+    address       = "10.10.30.50"
   }
 }
 

@@ -22,8 +22,5 @@ write_files:
       };
       
 runcmd:
-  - git clone https://github.com/estuardoquan/opt-bin.git /opt/bin
-  - git clone https://github.com/estuardoquan/openrc-services.git /opt/services
-  - chown 1000:1000 -R /opt/bin /opt/services
   - docker network create -d ipvlan --gateway 10.10.10.254 --subnet 10.10.10.0/24 -o parent=eth0.10 10_vlan 
   - docker network create -d ipvlan --gateway 10.10.20.254 --subnet 10.10.20.0/24 -o parent=eth0.20 20_vlan 

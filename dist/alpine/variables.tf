@@ -56,6 +56,11 @@ variable "net_vlan_id" {
   default = null
 }
 
+variable "net_trunks" {
+  type    = string
+  default = null
+}
+
 variable "net_gateway" {
   type    = string
   default = "10.0.0.254"
