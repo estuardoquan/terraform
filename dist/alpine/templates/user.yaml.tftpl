@@ -25,7 +25,5 @@ runcmd:
   - git clone https://github.com/estuardoquan/opt-bin.git /opt/bin
   - git clone https://github.com/estuardoquan/openrc-services.git /opt/services
   - chown 1000:1000 -R /opt/bin /opt/services
-  - find /opt/bin -type f -name '*.sh' -exec cp {} /usr/local/bin/ \;
-  - ln -s /opt/services/vlan/vlan /etc/init.d/vlan
-  - rc-update add vlan default
-  - rc-service vlan start
+  - docker network create -d ipvlan --gateway 10.10.10.254 --subnet 10.10.10.0/24 -o parent=eth0.10 10_vlan 
+  - docker network create -d ipvlan --gateway 10.10.20.254 --subnet 10.10.20.0/24 -o parent=eth0.20 20_vlan 
