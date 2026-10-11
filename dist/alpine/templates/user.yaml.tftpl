@@ -21,6 +21,3 @@ write_files:
          secret "${nsupdate_key_secret}";
       };
       
-runcmd:
-  - docker network create -d ipvlan --gateway 10.10.10.254 --subnet 10.10.10.0/24 -o parent=eth0.10 10_vlan 
-  - docker network create -d ipvlan --gateway 10.10.20.254 --subnet 10.10.20.0/24 -o parent=eth0.20 20_vlan 
