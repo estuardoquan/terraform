@@ -19,14 +19,12 @@ servers = {
         node_name     = "pve-39"
         template_vmid = 3050
         address       = "10.30.0.51"
-        ksm = 0
     }
     "alpine-352" = {
         vmid          = 352
         node_name     = "pve-39"
         template_vmid = 3050
         address       = "10.30.0.52"
-        ksm = 0
     }
 }
 

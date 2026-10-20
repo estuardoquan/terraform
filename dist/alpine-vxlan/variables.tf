@@ -5,7 +5,6 @@ variable "servers" {
     node_name = string
     template_vmid = number
     address   = string
-    ksm = number
   }))
 }
 
