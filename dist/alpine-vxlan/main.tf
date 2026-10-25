@@ -70,6 +70,6 @@ resource "proxmox_virtual_environment_vm" "alpine" {
   }
 
   lifecycle {
-    ignore_changes = [clone]
+    ignore_changes = [clone, initialization]
   }
 }

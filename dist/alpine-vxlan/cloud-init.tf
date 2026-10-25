@@ -19,8 +19,4 @@ resource "proxmox_virtual_environment_file" "user_data" {
       nsupdate_key_secret = var.nsupdate_key_secret
     })
   }
-
-  lifecycle {
-    ignore_changes = [source_raw]
-  }
 }
