@@ -9,6 +9,7 @@ snippet_datastore = "proxmox"
 disk_datastore = "vm"
 disk_size = 32
 ssh_public_key_file = "~/.ssh/id_ed25519.pub"
+github_ssh_key_file = "~/.ssh/id_ed25519"
 
 cpu_cores = 2
 memory = 2048

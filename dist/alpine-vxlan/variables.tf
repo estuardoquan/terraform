@@ -87,6 +87,10 @@ variable "ssh_public_key_file" {
   default = "~/.ssh/tf_id_ed25519.pub"
 }
 
+variable "github_ssh_key_file" {
+  type    = string
+  default = "~/.ssh/gh_id_ed25519.pub"
+}
 // nsupdate //
 variable "nsupdate_key_secret" {
   type      = string
