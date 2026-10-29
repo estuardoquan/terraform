@@ -29,3 +29,9 @@ manage_resolv_conf: true
 resolv_conf:
   nameservers: ${jsonencode(nameservers)}
 
+package_update: true
+packages:
+  - lua-language-server
+  - clang-extra-tools
+  - tree-sitter-cli
+  - build-base
