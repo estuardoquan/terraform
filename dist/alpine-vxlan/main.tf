@@ -3,11 +3,11 @@ resource "proxmox_virtual_environment_vm" "alpine" {
 
   name      = each.key
   vm_id     = each.value.vmid
-  node_name = each.value.node_name
+  node_name = each.value.node
 
   clone {
-    vm_id     = each.value.template_vmid
-    node_name = each.value.node_name
+    vm_id     = each.value.template
+    node_name = each.value.node
     full      = true
   }
 
