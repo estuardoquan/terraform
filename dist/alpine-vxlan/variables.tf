@@ -5,75 +5,29 @@ variable "servers" {
     node_name = string
     template_vmid = number
     address   = string
+    cpu = object({
+      cores = number
+      type = string
+    })
+    cpu_cores = number
+    memory = number
+    net = object({
+      bridge = string
+      gateway = optional(string)
+      prefix = optional(number, 24) 
+      trunks = optional(string)
+      vlan = optional(number)
+    })
+    disk = object({
+      size = number
+      store = string
+    })
+    nameservers = list(string)
+    snippets = object({
+      store = string
+      node = string
+    })
   }))
-}
-
-// Hardware //
-variable "cpu_cores" {
-  type    = number
-  default = 4
-}
-
-variable "cpu_type" {
-  type    = string
-  default = "host"
-}
-
-variable "memory" {
-  type    = number
-  default = 8192
-}
-
-variable "disk_size" {
-  type    = number
-  default = 16
-}
-
-variable "disk_datastore" {
-  type    = string
-  default = "local-lvm"
-}
-
-// Snippets live on the shared NFS storage //
-variable "snippet_datastore" {
-  type    = string
-  default = "local-lvm"
-}
-
-variable "snippet_node" {
-  type    = string
-  default = "pve-0"
-}
-
-// Network //
-variable "net_bridge" {
-  type    = string
-  default = "vmbr0"
-}
-
-variable "net_vlan_id" {
-  type    = number
-  default = null
-}
-
-variable "net_trunks" {
-  type    = string
-  default = null
-}
-
-variable "net_gateway" {
-  type    = string
-  default = "10.0.0.254"
-}
-
-variable "net_prefix" {
-  type    = number
-  default = 24
-}
-
-variable "nameservers" {
-  type    = list(string)
-  default = ["10.0.0.254"]
 }
 
 // Guest account //

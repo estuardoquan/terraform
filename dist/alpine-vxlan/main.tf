@@ -12,42 +12,42 @@ resource "proxmox_virtual_environment_vm" "alpine" {
   }
 
   cpu {
-    cores = var.cpu_cores
-    type  = var.cpu_type
+    cores = each.value.cpu.cores
+    type  = each.value.cpu.type
   }
 
   memory {
-    dedicated = var.memory
+    dedicated = each.value.memory
     floating  = 0
   }
 
   disk {
-    datastore_id = var.disk_datastore
+    datastore_id = each.value.disk.datastore
     interface    = "scsi0"
-    size         = var.disk_size
+    size         = each.value.disk_size
     discard      = "on"
     ssd          = true
   }
 
   network_device {
-    bridge  = var.net_bridge
-    vlan_id = var.net_vlan_id
+    bridge  = each.value.net_bridge
+    vlan_id = each.value.net_vlan_id
     model   = "virtio"
-    trunks  = var.net_trunks
+    trunks  = each.value.net_trunks
   }
 
   initialization {
-    datastore_id = var.disk_datastore
+    datastore_id = each.value.disk_datastore
 
     ip_config {
       ipv4 {
-        address = "${each.value.address}/${var.net_prefix}"
-        gateway = var.net_gateway
+        address = "${each.value.address}/${each.value.net_prefix}"
+        gateway = each.value.net_gateway
       }
     }
 
     dns {
-      servers = var.nameservers
+      servers = each.value.nameservers
     }
 
     user_data_file_id = proxmox_virtual_environment_file.user_data[each.key].id
@@ -65,7 +65,7 @@ resource "proxmox_virtual_environment_vm" "alpine" {
   bios    = "ovmf"
 
   efi_disk {
-    datastore_id = var.disk_datastore
+    datastore_id = each.value.disk_datastore
     type         = "4m"
   }
 
