@@ -22,27 +22,27 @@ resource "proxmox_virtual_environment_vm" "alpine" {
   }
 
   disk {
-    datastore_id = each.value.disk.datastore
+    datastore_id = each.value.disk.store
     interface    = "scsi0"
-    size         = each.value.disk_size
+    size         = each.value.disk.size
     discard      = "on"
     ssd          = true
   }
 
   network_device {
-    bridge  = each.value.net_bridge
-    vlan_id = each.value.net_vlan_id
+    bridge  = each.value.net.bridge
+    vlan_id = each.value.net.vlan
     model   = "virtio"
-    trunks  = each.value.net_trunks
+    trunks  = each.value.net.trunks
   }
 
   initialization {
-    datastore_id = each.value.disk_datastore
+    datastore_id = each.value.disk.store
 
     ip_config {
       ipv4 {
-        address = "${each.value.address}/${each.value.net_prefix}"
-        gateway = each.value.net_gateway
+        address = "${each.value.address}/${each.value.net.prefix}"
+        gateway = each.value.net.gateway
       }
     }
 
