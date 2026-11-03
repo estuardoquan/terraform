@@ -6,10 +6,9 @@ variable "servers" {
     template_vmid = number
     address   = string
     cpu = object({
-      cores = number
-      type = string
+      cores = optional(number, 2)
+      type = optional(string, host)
     })
-    cpu_cores = number
     memory = number
     net = object({
       bridge = string

@@ -65,7 +65,7 @@ resource "proxmox_virtual_environment_vm" "alpine" {
   bios    = "ovmf"
 
   efi_disk {
-    datastore_id = each.value.disk_datastore
+    datastore_id = each.value.disk.store
     type         = "4m"
   }
 
