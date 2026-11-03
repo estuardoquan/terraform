@@ -7,7 +7,7 @@ variable "servers" {
     // HARDWARE
     cpu = optional(object({
       cores = optional(number, 2)
-      type = optional(string, host)
+      type = optional(string, "host")
     }),{})
     disk = optional(object({
       size = optional(number, 16)
@@ -39,12 +39,12 @@ variable "github_ssh_key_file" {
   default = "~/.ssh/id_github"
 }
 
-variable "snippets_store" {
+variable "snippet_store" {
   type = string
   default = "local-lvm"
 }
 
-variable "snippets_node" {
+variable "snippet_node" {
   type = string
   default = "pve-39"
 }
