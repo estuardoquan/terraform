@@ -5,6 +5,8 @@ resource "proxmox_virtual_environment_vm" "alpine" {
   vm_id     = each.value.vmid
   node_name = each.value.node
 
+  migrate = true
+
   clone {
     vm_id     = each.value.template
     node_name = each.value.node

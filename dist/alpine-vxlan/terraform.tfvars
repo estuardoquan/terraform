@@ -52,7 +52,7 @@ servers = {
     }
     "alpine-1000" = {
         vmid = 1000
-        node = "pve-39"
+        node = "pve-38"
         template = 3050
         memory = 8192
         cpu = {
