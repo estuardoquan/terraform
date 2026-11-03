@@ -8,8 +8,8 @@ resource "proxmox_virtual_environment_file" "user_data" {
   for_each = var.servers
 
   content_type = "snippets"
-  datastore_id = each.value.snippet.store
-  node_name    = each.value.snippet.node
+  datastore_id = var.snippet_store
+  node_name    = var.snippet_node
 
   source_raw {
     file_name = "cloud-init-${each.key}.yaml"
