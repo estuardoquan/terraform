@@ -63,3 +63,17 @@ variable "os" {
   type = list(string)
   default = ["alpine", "deb-k3s"]
 }
+
+variable "default_packages" {
+  type = object({
+    "alpine" = optional(list(string), [
+      "lua-language-server",
+      "clang-extra-tools",
+      "tree-sitter-cli",
+      "build-base",
+      "nodejs",
+      "npm",
+    ])
+    "deb-k3s" = optional(list(string), [])
+  })
+}

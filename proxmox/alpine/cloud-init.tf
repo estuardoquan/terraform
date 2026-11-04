@@ -24,6 +24,7 @@ resource "proxmox_virtual_environment_file" "user_data" {
       ssh_public_key      = local.ssh_public_key
       github_private_key  = local.github_private_key
       github_public_key   = local.github_public_key
+      default_packages    = var.default_packages[local.os[each.key]]
       packages            = each.value.packages
     })
   }
