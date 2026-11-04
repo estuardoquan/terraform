@@ -4,6 +4,7 @@ variable "servers" {
     vmid = number
     node = string
     template  = number
+    domain = optional(string,"local")
     // HARDWARE
     cpu = optional(object({
       cores = optional(number, 2)
@@ -26,6 +27,14 @@ variable "servers" {
     }),{})
     // ACCOUNT
     username = optional(string, "admin")
+    packages = optional(list(string), [
+      "lua-language-server",
+      "clang-extra-tools",
+      "tree-sitter-cli",
+      "build-base",
+      "nodejs",
+      "npm",
+    ])
   }))
 }
 
@@ -48,3 +57,4 @@ variable "snippet_node" {
   type = string
   default = "pve-39"
 }
+

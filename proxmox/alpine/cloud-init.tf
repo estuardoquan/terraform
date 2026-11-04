@@ -14,12 +14,13 @@ resource "proxmox_virtual_environment_file" "user_data" {
   source_raw {
     file_name = "cloud-init-${each.key}.yaml"
     data = templatefile("${path.module}/templates/user.yaml.tftpl", {
-      hostname            = each.key
+      hostname            = each.value.domain == "" ? each.key : "${each.key}.${each.value.domain}" 
       username            = each.value.username
       nameservers         = each.value.nameservers
       ssh_public_key      = local.ssh_public_key
       github_private_key  = local.github_private_key
       github_public_key   = local.github_public_key
+      packages            = each.value.packages
     })
   }
 }
