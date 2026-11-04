@@ -35,6 +35,6 @@ provider "proxmox" {
 
   ssh {
     username    = var.proxmox_ssh_user
-    private_key = file(pathexpand("~/.ssh/id_ed25519"))
+    private_key = file(pathexpand(var.ssh_key_file))
   }
 }
