@@ -69,4 +69,5 @@ variable "default_packages" {
     ])
     deb-k3s = optional(list(string), [])
   })
+  default = {}
 }
