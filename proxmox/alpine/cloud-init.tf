@@ -4,7 +4,7 @@ locals {
   ssh_public_key = chomp(file(pathexpand("${var.ssh_key_file}.pub")))
   os = {
     for n, s in var.servers :
-    n => coalesce(s.distro, try(regex("^(${var.os_regex})-", n)[0], null))
+      n => coalesce(s.distro, try(regex("^(${join("|", var.os)})-", n)[0], null))
   }
 }
 
