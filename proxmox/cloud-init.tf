@@ -4,7 +4,7 @@ locals {
   ssh_public_key = chomp(file(pathexpand("${var.ssh_key_file}.pub")))
   os = {
     for n, s in var.servers :
-      n => coalesce(s.os, try(regex("^(${join("|", var.os)})-", n)[0], null))
+      n => coalesce(s.os, try(regex("^(${join("|", keys(var.os))})-", n)[0], null))
   }
 }
 
@@ -24,9 +24,9 @@ resource "proxmox_virtual_environment_file" "user_data" {
       ssh_public_key      = local.ssh_public_key
       github_private_key  = local.github_private_key
       github_public_key   = local.github_public_key
-      default_packages    = var.default_packages[local.os[each.key]]
+      default_packages    = var.os[local.os[each.key]].packages
       packages            = each.value.packages
-      default_cmd         = var.default_cmd[local.os[each.key]]
+      default_cmd         = var.os[local.os[each.key]].cmd
       cmd                 = each.value.cmd
     })
   }

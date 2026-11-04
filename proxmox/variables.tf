@@ -54,29 +54,23 @@ variable "snippet_node" {
 }
 
 variable "os" {
-  type = list(string)
-  default = ["alpine", "deb-k3s"]
-}
-
-variable "default_packages" {
   type = object({
-    alpine = optional(list(string), [
-      "lua-language-server",
-      "clang-extra-tools",
-      "tree-sitter-cli",
-      "build-base",
-      "nodejs",
-      "npm",
-    ])
-    deb-k3s = optional(list(string), [])
+    alpine = optional(object({
+      packages = optional(list(string), [
+        "lua-language-server",
+        "clang-extra-tools",
+        "tree-sitter-cli",
+        "build-base",
+        "nodejs",
+        "npm",
+      ])
+      cmd = optional(list(string,[]))
+    }))
+    deb-k3s = optional(object({
+      packages = optional(list(string), [])
+      cmd = optional(list(string,[]))
+    }))
   })
   default = {}
 }
 
-variable "default_cmd" {
-  type = object({
-    alpine = optional(list(string), [])
-    deb-k3s = optional(list(string), [])
-  })
-  default = {}
-}
