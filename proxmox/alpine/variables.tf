@@ -38,9 +38,9 @@ variable "servers" {
   }))
 }
 
-variable "ssh_public_key_file" {
+variable "ssh_key_file" {
   type    = string
-  default = "~/.ssh/tf_id_ed25519.pub"
+  default = "~/.ssh/id_ed25519"
 }
 
 variable "github_ssh_key_file" {

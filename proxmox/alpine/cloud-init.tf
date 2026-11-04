@@ -1,7 +1,7 @@
 locals {
-  ssh_public_key = chomp(file(pathexpand(var.ssh_public_key_file)))
   github_private_key = sensitive(file(pathexpand(var.github_ssh_key_file)))
   github_public_key  = chomp(file(pathexpand("${var.github_ssh_key_file}.pub")))
+  ssh_public_key = chomp(file(pathexpand("${var.ssh_key_file}.pub")))
 }
 
 resource "proxmox_virtual_environment_file" "user_data" {
