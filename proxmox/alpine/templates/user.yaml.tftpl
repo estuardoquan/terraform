@@ -30,5 +30,5 @@ resolv_conf:
   nameservers: ${jsonencode(nameservers)}
 
 package_update: true
-packages: $(jsonencode(packages))
+packages: ${jsonencode(packages)}
 
