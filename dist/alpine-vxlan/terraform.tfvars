@@ -67,7 +67,6 @@ servers = {
         }
         disk = {
             size = 32
-            store = "vm"
         }
     }
 }

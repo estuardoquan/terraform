@@ -7,7 +7,7 @@ variable "servers" {
     // HARDWARE
     cpu = optional(object({
       cores = optional(number, 2)
-      type = optional(string, "host")
+      type = optional(string, "x86-64-v2-AES")
     }),{})
     disk = optional(object({
       size = optional(number, 16)
