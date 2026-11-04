@@ -2,6 +2,10 @@ locals {
   github_private_key = sensitive(file(pathexpand(var.github_ssh_key_file)))
   github_public_key  = chomp(file(pathexpand("${var.github_ssh_key_file}.pub")))
   ssh_public_key = chomp(file(pathexpand("${var.ssh_key_file}.pub")))
+  os = {
+    for n, s in var.servers :
+    n => coalesce(s.distro, try(regex("^(${var.os_regex})-", n)[0], null))
+  }
 }
 
 resource "proxmox_virtual_environment_file" "user_data" {
@@ -13,7 +17,7 @@ resource "proxmox_virtual_environment_file" "user_data" {
 
   source_raw {
     file_name = "cloud-init-${each.key}.yaml"
-    data = templatefile("${path.module}/templates/user.yaml.tftpl", {
+    data = templatefile("${path.module}/templates/${local.os[each.key]}.yaml.tftpl", {
       hostname            = each.value.domain == "" ? each.key : "${each.key}.${each.value.domain}" 
       username            = each.value.username
       nameservers         = each.value.nameservers

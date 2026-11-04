@@ -58,3 +58,7 @@ variable "snippet_node" {
   default = "pve-39"
 }
 
+variable "os_regex" {
+  type = string
+  default = "alpine|deb-k3s"
+}
