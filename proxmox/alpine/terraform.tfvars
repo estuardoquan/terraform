@@ -93,12 +93,6 @@ servers = {
             size = 32
         }
         packages = [
-            "lua-language-server",
-            "clang-extra-tools",
-            "tree-sitter-cli",
-            "build-base",
-            "nodejs",
-            "npm",
             "ripgrep"
         ]
     }

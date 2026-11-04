@@ -28,7 +28,7 @@ variable "servers" {
     }),{})
     // ACCOUNT
     username = optional(string, "admin")
-    packages = optional(list(string))
+    packages = optional(list(string), [])
   }))
 }
 
