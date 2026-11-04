@@ -29,6 +29,7 @@ variable "servers" {
     // ACCOUNT
     username = optional(string, "admin")
     packages = optional(list(string), [])
+    cmd = optional(list(string), [])
   }))
 }
 
@@ -67,6 +68,14 @@ variable "default_packages" {
       "nodejs",
       "npm",
     ])
+    deb-k3s = optional(list(string), [])
+  })
+  default = {}
+}
+
+variable "default_cmd" {
+  type = object({
+    alpine = optional(list(string), [])
     deb-k3s = optional(list(string), [])
   })
   default = {}

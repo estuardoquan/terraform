@@ -33,4 +33,7 @@ package_update: true
 %{ if length(default_packages) + length(packages) > 0 ~}
 packages: ${jsonencode(concat(default_packages, packages))}
 %{ endif ~}
+%{ if length(default_cmd) + length(cmd) > 0 ~}
+cmd: ${jsonencode(concat(default_cmd, cmd))}
+%{ endif ~}
 

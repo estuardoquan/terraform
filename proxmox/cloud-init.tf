@@ -26,6 +26,8 @@ resource "proxmox_virtual_environment_file" "user_data" {
       github_public_key   = local.github_public_key
       default_packages    = var.default_packages[local.os[each.key]]
       packages            = each.value.packages
+      default_cmd         = var.default_cmd[local.os[each.key]]
+      cmd                 = each.value.cmd
     })
   }
 }
