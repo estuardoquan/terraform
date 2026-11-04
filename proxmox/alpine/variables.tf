@@ -4,7 +4,7 @@ variable "servers" {
     vmid = number
     node = string
     template  = number
-    os = options(string)
+    os = optional(string)
     domain = optional(string,"local")
     // HARDWARE
     cpu = optional(object({
