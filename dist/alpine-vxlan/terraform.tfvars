@@ -2,6 +2,27 @@ snippet_store = "proxmox"
 ssh_public_key_file = "~/.ssh/id_ed25519.pub"
 
 servers = {
+    "alpine-350" = {
+        vmid = 350
+        node = "pve-39"
+        template = 3050
+        memory = 2048
+        cpu = {
+            cores = 2
+        }
+        address = "10.10.30.50"
+        nameservers = ["10.10.30.254"]
+        net = {
+            bridge = "vmbr0"
+            gateway = "10.10.30.254"
+            vlan = 30
+            trunks = "10;20"
+        }
+        disk = {
+            size = 32
+            store = "vm"
+        }
+    }
     "alpine-351" = {
         vmid = 351
         node = "pve-39"
