@@ -28,14 +28,7 @@ variable "servers" {
     }),{})
     // ACCOUNT
     username = optional(string, "admin")
-    packages = optional(list(string), [
-      "lua-language-server",
-      "clang-extra-tools",
-      "tree-sitter-cli",
-      "build-base",
-      "nodejs",
-      "npm",
-    ])
+    packages = optional(list(string))
   }))
 }
 
@@ -66,7 +59,7 @@ variable "os" {
 
 variable "default_packages" {
   type = object({
-    "alpine" = optional(list(string), [
+    alpine = optional(list(string), [
       "lua-language-server",
       "clang-extra-tools",
       "tree-sitter-cli",
@@ -74,6 +67,6 @@ variable "default_packages" {
       "nodejs",
       "npm",
     ])
-    "deb-k3s" = optional(list(string), [])
+    deb-k3s = optional(list(string), [])
   })
 }
