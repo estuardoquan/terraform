@@ -64,11 +64,11 @@ variable "os" {
         "nodejs",
         "npm",
       ])
-      cmd = optional(list(string,[]))
+      cmd = optional(list(string), [])
     }))
     deb-k3s = optional(object({
       packages = optional(list(string), [])
-      cmd = optional(list(string,[]))
+      cmd = optional(list(string), [])
     }))
   })
   default = {}
