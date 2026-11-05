@@ -11,7 +11,7 @@ users:
     ssh_authorized_keys:
       - ${ssh_public_key}
 
-%{ if swap != "" ~}
+%{ if swap_size != "" ~}
 swap:
   filename: /swapfile
   size: ${swap_size}
