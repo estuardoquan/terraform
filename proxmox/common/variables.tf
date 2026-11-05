@@ -55,14 +55,7 @@ variable "snippet_node" {
 
 variable "default_packages" {
   type = list(string)
-  default = [
-    "lua-language-server",
-    "clang-extra-tools",
-    "tree-sitter-cli",
-    "build-base",
-    "nodejs",
-    "npm",
-  ]
+  default = []
 }
 
 variable "default_runcmd" {

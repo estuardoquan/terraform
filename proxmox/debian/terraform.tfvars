@@ -1,5 +1,10 @@
 snippet_store = "proxmox"
 
+default_packages = [
+    "nodejs",
+    "npm",
+]
+
 servers = {
     "debian-499" = {
         vmid = 499

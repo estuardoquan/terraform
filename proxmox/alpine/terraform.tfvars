@@ -1,5 +1,14 @@
 snippet_store = "proxmox"
 
+default_packages = [
+    "lua-language-server",
+    "clang-extra-tools",
+    "tree-sitter-cli",
+    "build-base",
+    "nodejs",
+    "npm",
+]
+
 servers = {
     "alpine-350" = {
         vmid = 350
