@@ -29,7 +29,7 @@ variable "servers" {
     // ACCOUNT
     username = optional(string, "admin")
     packages = optional(list(string), [])
-    cmd = optional(list(string), [])
+    runcmd = optional(list(string), [])
   }))
 }
 
@@ -53,24 +53,20 @@ variable "snippet_node" {
   default = "pve-39"
 }
 
-variable "os" {
-  type = object({
-    alpine = optional(object({
-      packages = optional(list(string), [
-        "lua-language-server",
-        "clang-extra-tools",
-        "tree-sitter-cli",
-        "build-base",
-        "nodejs",
-        "npm",
-      ])
-      cmd = optional(list(string), [])
-    }), {})
-    deb-k3s = optional(object({
-      packages = optional(list(string), [])
-      cmd = optional(list(string), [])
-    }), {})
-  })
-  default = {}
+variable "default_packages" {
+  type = list(string)
+  default = [
+    "lua-language-server",
+    "clang-extra-tools",
+    "tree-sitter-cli",
+    "build-base",
+    "nodejs",
+    "npm",
+  ]
+}
+
+variable "default_runcmd" {
+  type = list(string)
+  default = []
 }
 
