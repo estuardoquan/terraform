@@ -11,10 +11,6 @@ servers = {
         node = "pve-38"
         template = 400
         memory = 4096
-        swap = {
-            size = "8G"
-            max = "8G"
-        }
         cpu = {
             cores = 2
         }

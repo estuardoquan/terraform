@@ -15,8 +15,8 @@ variable "servers" {
       store = optional(string, "local-lvm")
     }),{})
     swap = optional(object({
-      size = optional(string, "4G")
-      max = optional(string, "4G")
+      size = optional(string, "")
+      max = optional(string, "")
     }), {})
     memory = number
     // NETWORK

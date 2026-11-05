@@ -11,10 +11,12 @@ users:
     ssh_authorized_keys:
       - ${ssh_public_key}
 
+%{ if swap != "" ~}
 swap:
   filename: /swapfile
   size: ${swap_size}
   maxsize: ${swap_max}
+%{ endif ~}
 
 write_files:
   - path: /home/${username}/.ssh/id_ed25519
