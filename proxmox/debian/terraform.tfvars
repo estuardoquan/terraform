@@ -1,14 +1,5 @@
 snippet_store = "proxmox"
 
-default_bootcmd = [
-    "sh -c 'growpart /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0 2 || true'",
-    "sh -c '[ $(vgs --noheadings -o vg_free_count vg0 | tr -d ) -gt 0 ] && lvextend -r -l +100%FREE vg0/lv_root || true'"
-]
-
-default_packages = [
-    "npm",
-    "nodejs",
-]
 
 servers = {
     "debian-499" = {
@@ -35,3 +26,15 @@ servers = {
         runcmd = ["systemctl mask tmp.mount"]
     }
 }
+
+default_bootcmd = [
+    "pv=$(pvs --noheadings -o pv_name -S vg_name=vg0 | tr -d ' ' | head -n 1)",
+    "part=$(basename \"$(readlink -f \"$pv\")\")",
+    "growpart \"/dev/$(basename \"$(readlink -f /sys/class/block/$part/..)\")\" \"$(cat /sys/class/block/$part/partition)\" || true",
+    "[ \"$(vgs --noheadings -o vg_free_count vg0 | tr -d ' ')\" -gt 0 ] && lvextend -r -l +100%FREE vg0/root || true",
+]
+
+default_packages = [
+    "npm",
+    "nodejs",
+]
