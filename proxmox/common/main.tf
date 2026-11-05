@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_vm" "alpine" {
+resource "proxmox_virtual_environment_vm" "default" {
   for_each = var.servers
 
   name      = each.key
