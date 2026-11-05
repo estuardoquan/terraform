@@ -14,10 +14,7 @@ variable "servers" {
       size = optional(number, 16)
       store = optional(string, "local-lvm")
     }),{})
-    swap = optional(object({
-      size = optional(string, "")
-      max = optional(string, "")
-    }), {})
+    swap_size = optional(string, "")
     memory = number
     // NETWORK
     address   = string
@@ -32,6 +29,7 @@ variable "servers" {
     // ACCOUNT
     username = optional(string, "admin")
     packages = optional(list(string), [])
+    bootcmd = optional(list(string), [])
     runcmd = optional(list(string), [])
   }))
 }
@@ -54,6 +52,11 @@ variable "snippet_store" {
 variable "snippet_node" {
   type = string
   default = "pve-39"
+}
+
+variable "default_bootcmd" {
+  type = list(string)
+  default = []
 }
 
 variable "default_packages" {

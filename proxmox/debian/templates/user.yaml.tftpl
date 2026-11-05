@@ -16,7 +16,7 @@ users:
 swap:
   filename: /swapfile
   size: ${swap_size}
-  maxsize: ${swap_max}
+  maxsize: ${swap_size}
 %{ endif ~}
 
 write_files:
@@ -42,10 +42,14 @@ write_files:
 
 package_update: true
 
+%{ if length(default_bootcmd) + length(bootcmd) > 0 ~}
+bootcmd: ${jsonencode(concat(default_bootcmd, bootcmd))}
+%{ endif ~}
+
 %{ if length(default_packages) + length(packages) > 0 ~}
 packages: ${jsonencode(concat(default_packages, packages))}
 %{ endif ~}
 
-%{ if length(default_cmd) + length(cmd) > 0 ~}
-runcmd: ${jsonencode(concat(default_cmd, cmd))}
+%{ if length(default_runcmd) + length(runcmd) > 0 ~}
+runcmd: ${jsonencode(concat(default_runcmd, runcmd))}
 %{ endif ~}

@@ -17,15 +17,17 @@ resource "proxmox_virtual_environment_file" "user_data" {
       hostname            = each.value.domain == "" ? each.key : "${each.key}.${each.value.domain}" 
       username            = each.value.username
       nameservers         = each.value.nameservers
+      swap_size           = each.value.swap_size
+      default_packages    = var.default_packages
+      default_runcmd      = var.default_runcmd
+      default_bootcmd     = var.default_bootcmd
+      bootcmd             = each.value.bootcmd
+      packages            = each.value.packages
+      runcmd              = each.value.runcmd
       ssh_public_key      = local.ssh_public_key
       github_private_key  = local.github_private_key
       github_public_key   = local.github_public_key
-      swap_size           = each.value.swap.size
-      swap_max            = each.value.swap.max
-      default_packages    = var.default_packages
-      packages            = each.value.packages
-      default_cmd         = var.default_runcmd
-      cmd                 = each.value.runcmd
+
     })
   }
 }

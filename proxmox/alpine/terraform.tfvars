@@ -91,7 +91,7 @@ servers = {
         cpu = {
             cores = 4
         }
-        address = "10.255.10.10"
+        address = "10.255.10.11"
         nameservers = ["10.255.10.254"]
         net = {
             bridge = "vxlan0"

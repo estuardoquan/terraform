@@ -1,8 +1,13 @@
 snippet_store = "proxmox"
 
+default_bootcmd = [
+    "sh -c 'growpart /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0 2 || true'",
+    "sh -c '[ $(vgs --noheadings -o vg_free_count vg0 | tr -d ) -gt 0 ] && lvextend -r -l +100%FREE vg0/lv_root || true'"
+]
+
 default_packages = [
-    "nodejs",
     "npm",
+    "nodejs",
 ]
 
 servers = {
@@ -21,7 +26,7 @@ servers = {
             gateway = "10.10.0.254"
         }
         disk = {
-            size = 64
+            size = 8
         }
         packages = [
             "podman",

@@ -72,6 +72,9 @@ resource "proxmox_virtual_environment_vm" "default" {
   }
 
   lifecycle {
-    ignore_changes = [clone, initialization]
+    ignore_changes = [
+      clone, 
+      initialization[0].user_data_file_id
+    ]
   }
 }
