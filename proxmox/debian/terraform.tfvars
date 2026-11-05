@@ -17,7 +17,12 @@ servers = {
             gateway = "10.10.0.254"
         }
         disk = {
-            size = 8
+            size = 6
+        }
+        disks = {
+            "scsi1" = {
+                size = 2
+            }
         }
         packages = [
             "podman",
