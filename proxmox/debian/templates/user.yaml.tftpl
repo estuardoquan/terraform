@@ -12,6 +12,11 @@ users:
     ssh_authorized_keys:
       - ${ssh_public_key}
 
+swap:
+  filename: /swapfile
+  size: ${swap_size}
+  maxsize: ${swap_max}
+
 write_files:
   - path: /etc/resolv.conf
     permissions: "0644"
@@ -34,9 +39,11 @@ write_files:
       ${github_public_key}
 
 package_update: true
+
 %{ if length(default_packages) + length(packages) > 0 ~}
 packages: ${jsonencode(concat(default_packages, packages))}
 %{ endif ~}
+
 %{ if length(default_cmd) + length(cmd) > 0 ~}
 runcmd: ${jsonencode(concat(default_cmd, cmd))}
 %{ endif ~}

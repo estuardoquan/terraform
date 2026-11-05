@@ -14,6 +14,10 @@ variable "servers" {
       size = optional(number, 16)
       store = optional(string, "local-lvm")
     }),{})
+    swap = optional(object({
+      size = optional(number, 4)
+      max = optional(number, 4)
+    }))
     memory = number
     // NETWORK
     address   = string

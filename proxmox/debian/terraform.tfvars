@@ -21,8 +21,12 @@ servers = {
             gateway = "10.10.0.254"
         }
         disk = {
-            size = 32
-            store = "vm"
+            size = 64
         }
+        packages = [
+            "podman",
+            "unzip",
+        ]
+        runcmd = ["systemctl mask tmp.mount"]
     }
 }

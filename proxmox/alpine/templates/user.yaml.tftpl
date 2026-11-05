@@ -11,6 +11,11 @@ users:
     ssh_authorized_keys:
       - ${ssh_public_key}
 
+swap:
+  filename: /swapfile
+  size: ${swap_size}
+  maxsize: ${swap_max}
+
 write_files:
   - path: /home/${username}/.ssh/id_ed25519
     permissions: "0600"
@@ -26,13 +31,16 @@ write_files:
       ${github_public_key}
 
 manage_resolv_conf: true
+
 resolv_conf:
   nameservers: ${jsonencode(nameservers)}
 
 package_update: true
+
 %{ if length(default_packages) + length(packages) > 0 ~}
 packages: ${jsonencode(concat(default_packages, packages))}
 %{ endif ~}
+
 %{ if length(default_cmd) + length(cmd) > 0 ~}
 runcmd: ${jsonencode(concat(default_cmd, cmd))}
 %{ endif ~}
