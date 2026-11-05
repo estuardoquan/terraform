@@ -5,13 +5,21 @@ manage_etc_hosts: true
 
 users:
   - name: ${username}
-    groups: [docker, wheel]
+    groups: [sudo]
     shell: /bin/bash
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
     lock_passwd: true
     ssh_authorized_keys:
       - ${ssh_public_key}
 
 write_files:
+  - path: /etc/resolv.conf
+    permissions: "0644"
+    owner: root:root
+    content: |
+%{ for ns in nameservers ~}
+      nameserver ${ns}
+%{ endfor ~}
   - path: /home/${username}/.ssh/id_ed25519
     permissions: "0600"
     owner: ${username}:${username}
@@ -25,10 +33,6 @@ write_files:
     content: |
       ${github_public_key}
 
-manage_resolv_conf: true
-resolv_conf:
-  nameservers: ${jsonencode(nameservers)}
-
 package_update: true
 %{ if length(default_packages) + length(packages) > 0 ~}
 packages: ${jsonencode(concat(default_packages, packages))}
@@ -36,4 +40,3 @@ packages: ${jsonencode(concat(default_packages, packages))}
 %{ if length(default_cmd) + length(cmd) > 0 ~}
 runcmd: ${jsonencode(concat(default_cmd, cmd))}
 %{ endif ~}
-
