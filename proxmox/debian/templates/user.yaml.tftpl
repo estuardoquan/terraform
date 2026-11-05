@@ -42,8 +42,8 @@ write_files:
 
 package_update: true
 
-%{ if length(default_bootcmd) + length(bootcmd) > 0 ~}
-bootcmd: ${jsonencode(concat(default_bootcmd, bootcmd))}
+%{ if length(default_bootcmd) + length(bootcmd) + length(disk_bootcmd) > 0 ~}
+bootcmd: ${jsonencode(concat(default_bootcmd, disk_bootcmd, bootcmd))}
 %{ endif ~}
 
 %{ if length(default_packages) + length(packages) > 0 ~}
