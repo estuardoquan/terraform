@@ -10,10 +10,10 @@ variable "servers" {
       cores = optional(number, 2)
       type = optional(string, "x86-64-v2-AES")
     }),{})
-    disk = object({
+    disk = optional(object({
       size = optional(number, 6)
       store = optional(string, "local-lvm")
-    }, {})
+    }), {})
     disks = optional(map(object({
       size = optional(number, 2)
       store = optional(string, "local-lvm")
