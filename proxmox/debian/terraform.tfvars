@@ -16,14 +16,6 @@ servers = {
             bridge = "vmbr0"
             gateway = "10.10.0.254"
         }
-        disk = {
-            size = 6
-        }
-        disks = {
-            "scsi1" = {
-                size = 2
-            }
-        }
         packages = [
             "podman",
             "unzip",
