@@ -40,7 +40,7 @@ resource "proxmox_virtual_environment_vm" "default" {
       size              = disk.value.size
       interface         = disk.key
       discard           = "on"
-      ssd               = "off"
+      ssd               = true
     }
   }
   
