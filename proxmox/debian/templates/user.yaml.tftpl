@@ -19,6 +19,10 @@ swap:
   maxsize: ${swap_size}
 %{ endif ~}
 
+%{ if length(disk_mounts) > 0 ~}
+mounts: ${jsonencode(disk_mounts)}
+%{ endif ~}
+
 write_files:
   - path: /etc/resolv.conf
     permissions: "0644"

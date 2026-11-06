@@ -12,6 +12,11 @@ locals {
       ]
     ])
   }
+  disk_mounts = {
+    for name, server in var.servers : name => [
+      for k, v in server.disks : ["LABEL=${k}", v.mount, "ext4", "defaults,nofail", "0", "2"] if v.mount != null
+    ]
+  }
 }
 
 resource "proxmox_virtual_environment_file" "user_data" {
@@ -28,6 +33,7 @@ resource "proxmox_virtual_environment_file" "user_data" {
       username            = each.value.username
       nameservers         = each.value.nameservers
       swap_size           = each.value.swap_size
+      disk_mounts         = local.disk_mounts[each.key]
       default_bootcmd     = var.default_bootcmd
       default_packages    = var.default_packages
       default_runcmd      = var.default_runcmd

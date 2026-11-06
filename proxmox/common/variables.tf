@@ -17,7 +17,12 @@ variable "servers" {
     disks = optional(map(object({
       size = optional(number, 2)
       store = optional(string, "local-lvm")
-    })), {"scsi1" = {}})
+      mount = optional(string)
+    })), {
+      "scsi1" = {
+        mount = "/home"
+      }
+    })
     swap_size = optional(string, "")
     memory = number
     // NETWORK
