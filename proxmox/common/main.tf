@@ -1,3 +1,18 @@
+locals {
+  data_disks = merge([
+    for name, server in var.servers : {
+      for k, v in server.disks : "${name}-${k}" => {
+        server = name
+        node   = server.node
+        vmid   = server.vmid + 1000 * tonumber(trimprefix(k, "scsi"))
+        key    = k
+        size   = v.size
+        store  = v.store
+      }
+    }
+  ]...)
+}
+
 resource "proxmox_virtual_environment_vm" "default" {
   for_each = var.servers
 
@@ -30,9 +45,8 @@ resource "proxmox_virtual_environment_vm" "default" {
     discard      = "on"
     ssd          = true
   }
-
   dynamic "disk" {
-    for_each = { for d in try(proxmox_virtual_environment_vm.data[each.key].disk, []) : d.interface => d }
+    for_each = { for id, d in local.data_disks : d.key => proxmox_virtual_environment_vm.data[id].disk[0] if d.server == each.key }
     content {
       datastore_id      = disk.value.datastore_id
       path_in_datastore = disk.value.path_in_datastore
@@ -92,20 +106,19 @@ resource "proxmox_virtual_environment_vm" "default" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "data" {
-  for_each = { for name, server in var.servers : name => server if length(server.disks) > 0 }
 
-  name      = "${each.key}-data"
+resource "proxmox_virtual_environment_vm" "data" {
+  for_each = local.data_disks
+
+  name      = "${each.value.server}-data-${each.value.key}"
+  vm_id     = each.value.vmid
   node_name = each.value.node
   started   = false
   on_boot   = false
 
-  dynamic "disk" {
-    for_each = each.value.disks
-    content {
-      datastore_id = disk.value.store
-      interface    = disk.key
-      size         = disk.value.size
-    }
+  disk {
+    datastore_id = each.value.store
+    interface    = each.value.key
+    size         = each.value.size
   }
 }
