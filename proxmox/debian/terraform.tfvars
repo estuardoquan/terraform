@@ -6,7 +6,16 @@ servers = {
         node = "pve-38"
         template = 400
         memory = 4096
-        swap_size = "2G" 
+        swap_size = "2G"
+        disks = {
+            "scsi0" = {
+            size = 15
+        }
+            "scsi1" = {
+                mount = "/home"
+                size = 20
+            }
+        }
         cpu = {
             cores = 2
         }
@@ -18,7 +27,6 @@ servers = {
         }
         packages = [
             "podman",
-            "unzip",
         ]
         runcmd = ["systemctl mask tmp.mount"]
     }
@@ -32,6 +40,10 @@ default_bootcmd = [
 ]
 
 default_packages = [
-    "npm",
+    "neovim",
     "nodejs",
+    "npm",
+    "stow",
+    "tmux",
+    "unzip",
 ]
