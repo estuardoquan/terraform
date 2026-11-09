@@ -38,13 +38,6 @@ resource "proxmox_virtual_environment_vm" "default" {
     floating  = 0
   }
   
-  disk {
-    datastore_id = each.value.disk.store
-    interface    = "scsi0"
-    size         = each.value.disk.size
-    discard      = "on"
-    ssd          = true
-  }
   dynamic "disk" {
     for_each = each.value.disks
     content {
