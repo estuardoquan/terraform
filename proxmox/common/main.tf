@@ -46,13 +46,11 @@ resource "proxmox_virtual_environment_vm" "default" {
     ssd          = true
   }
   dynamic "disk" {
-    for_each = { for id, d in local.data_disks : d.key => proxmox_virtual_environment_vm.data[id].disk[0] if d.server == each.key }
+    for_each = each.value.disks
     content {
       datastore_id      = disk.value.datastore_id
-      path_in_datastore = disk.value.path_in_datastore
-      file_format       = disk.value.file_format
-      size              = disk.value.size
       interface         = disk.key
+      size              = disk.value.size
       discard           = "on"
       ssd               = true
     }
