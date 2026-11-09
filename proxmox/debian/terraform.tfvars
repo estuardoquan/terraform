@@ -1,12 +1,12 @@
 snippet_store = "proxmox"
 
-
 servers = {
     "debian-499" = {
         vmid = 499
         node = "pve-38"
         template = 400
         memory = 4096
+        swap_size = "2G" 
         cpu = {
             cores = 2
         }

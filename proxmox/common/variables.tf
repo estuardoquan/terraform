@@ -20,10 +20,11 @@ variable "servers" {
       mount = optional(string)
     })), {
       "scsi0" = {
-        size = 8
+        size = 12
       }
       "scsi1" = {
         mount = "/home"
+        size = 16
       }
     })
     swap_size = optional(string, "")
