@@ -10,6 +10,10 @@ variable "servers" {
       cores = optional(number, 2)
       type = optional(string, "x86-64-v2-AES")
     }),{})
+    efi = optional(object({
+      store = optional(string, "local-lvm")
+      size = optional(string, "4m")
+    }), {})
     disks = optional(map(object({
       size = optional(number, 2)
       store = optional(string, "local-lvm")
@@ -17,6 +21,7 @@ variable "servers" {
     })), {
       "scsi0" = {
         mount = "/"
+        size = 8
       }
       "scsi1" = {
         mount = "/home"
