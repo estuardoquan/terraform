@@ -20,7 +20,6 @@ variable "servers" {
       mount = optional(string)
     })), {
       "scsi0" = {
-        mount = "/"
         size = 8
       }
       "scsi1" = {
