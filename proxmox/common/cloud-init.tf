@@ -37,7 +37,6 @@ resource "proxmox_virtual_environment_file" "user_data" {
       default_bootcmd     = var.default_bootcmd
       default_packages    = var.default_packages
       default_runcmd      = var.default_runcmd
-      default_lv          = var.default_lv
       disk_bootcmd        = local.disk_bootcmd[each.key]
       bootcmd             = each.value.bootcmd
       packages            = each.value.packages
@@ -45,6 +44,7 @@ resource "proxmox_virtual_environment_file" "user_data" {
       ssh_public_key      = local.ssh_public_key
       github_private_key  = local.github_private_key
       github_public_key   = local.github_public_key
+      vg0                 = var.default_vg
     })
   }
 }
