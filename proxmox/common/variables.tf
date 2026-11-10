@@ -69,7 +69,12 @@ variable "snippet_node" {
 
 variable "default_bootcmd" {
   type = list(string)
-  default = []
+  default = [
+    "pv=$(pvs --noheadings -o pv_name -S vg_name=${vg0} | tr -d ' ' | head -n 1)",
+    "part=$(basename \"$(readlink -f \"$pv\")\")",
+    "growpart \"/dev/$(basename \"$(readlink -f /sys/class/block/$part/..)\")\" \"$(cat /sys/class/block/$part/partition)\" || true",
+    "[ \"$(vgs --noheadings -o vg_free_count ${vg0} | tr -d ' ')\" -gt 0 ] && lvextend -r -l +100%FREE ${vg0}/root || true",
+  ]
 }
 
 variable "default_packages" {
@@ -82,3 +87,7 @@ variable "default_runcmd" {
   default = []
 }
 
+variable "default_vg" {
+  type = string
+  default = "vg0"
+}

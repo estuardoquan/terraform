@@ -37,6 +37,7 @@ resource "proxmox_virtual_environment_file" "user_data" {
       default_bootcmd     = var.default_bootcmd
       default_packages    = var.default_packages
       default_runcmd      = var.default_runcmd
+      default_lv          = var.default_lv
       disk_bootcmd        = local.disk_bootcmd[each.key]
       bootcmd             = each.value.bootcmd
       packages            = each.value.packages
