@@ -18,6 +18,7 @@ servers = {
         disks = {
             "scsi0" = {
                 store = "vm"
+                size = 4
             }
             "scsi1" = {
                 mount = "/home"
@@ -32,7 +33,7 @@ servers = {
         }
         packages = [
             "docker",
-            "docker-compose-cli",
+            "docker-cli-compose",
         ]
     }
 }

@@ -15,7 +15,7 @@ variable "servers" {
       size = optional(string, "4m")
     }), {})
     disks = optional(map(object({
-      size = optional(number, 2)
+      size = optional(number, 1)
       store = optional(string, "local-lvm")
       mount = optional(string)
     })), {
