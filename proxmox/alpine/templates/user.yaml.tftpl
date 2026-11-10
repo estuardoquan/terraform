@@ -15,7 +15,11 @@ users:
 swap:
   filename: /swapfile
   size: ${swap_size}
-  maxsize: ${swap_max}
+  maxsize: ${swap_size}
+%{ endif ~}
+
+%{ if length(disk_mounts) > 0 ~}
+mounts: ${jsonencode(disk_mounts)}
 %{ endif ~}
 
 write_files:
@@ -39,11 +43,14 @@ resolv_conf:
 
 package_update: true
 
+%{ if length(default_bootcmd) + length(bootcmd) + length(disk_bootcmd) > 0 ~}
+bootcmd: ${jsonencode(concat(default_bootcmd, disk_bootcmd, bootcmd))}
+%{ endif ~}
+
 %{ if length(default_packages) + length(packages) > 0 ~}
 packages: ${jsonencode(concat(default_packages, packages))}
 %{ endif ~}
 
-%{ if length(default_cmd) + length(cmd) > 0 ~}
-runcmd: ${jsonencode(concat(default_cmd, cmd))}
+%{ if length(default_runcmd) + length(runcmd) > 0 ~}
+runcmd: ${jsonencode(concat(default_runcmd, runcmd))}
 %{ endif ~}
-
