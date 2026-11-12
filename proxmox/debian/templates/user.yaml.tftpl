@@ -50,7 +50,7 @@ package_update: true
 bootcmd: ${jsonencode(bootcmd)}
 %{ endif ~}
 
-%{ if length(length(packages) > 0 ~}
+%{ if length(packages) > 0 ~}
 packages: ${jsonencode(packages)}
 %{ endif ~}
 
