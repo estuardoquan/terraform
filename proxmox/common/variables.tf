@@ -14,15 +14,16 @@ variable "servers" {
       store = optional(string, "local-lvm")
       size = optional(string, "4m")
     }), {})
-    disks = optional(map(object({
+   disks = optional(map(object({
       size = optional(number, 2)
-      store = optional(string, "local_lvm")
+      store = optional(string, "local-lvm")
       lvm = optional(map(object({
         mount = optional(string)
         size = optional(string, "100%")
-    }), {
-      "lv_root" = {}
-    })),{
+      })), {
+        "lv_root" = {}
+      })
+    })), {
       "scsi0" = {
         size = 4
       }
