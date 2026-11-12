@@ -15,27 +15,25 @@ variable "servers" {
       size = optional(string, "4m")
     }), {})
     disks = optional(map(object({
-      size = optional(number, 1)
-      store = optional(string, "local-lvm")
-      lvm = map(object({
+      size = optional(number, 2)
+      store = optional(string, "local_lvm")
+      lvm = optional(map(object({
         mount = optional(string)
-        vg = optional(string, "vg0")
-        lv = optional(string, "lv_root")
         size = optional(string, "100%")
-      }),{})
     }), {
+      "lv_root" = {}
+    }),{
       "scsi0" = {
         size = 4
       }
       "scsi1" = {
-        size = 2
         lvm = {
-          mount = "/home"
-          vg = "vg_data"
-          lv = "lv_home"
+          "lv_home" = {
+            mount = "/home"
+          }
         }
       }
-    }))
+    })
     swap_size = optional(string, "")
     memory = number
     // NETWORK
