@@ -12,15 +12,15 @@ users:
     ssh_authorized_keys:
       - ${ssh_public_key}
 
-%{ if swap_size != "" ~}
+%{ if swap != "" ~}
 swap:
   filename: /swapfile
-  size: ${swap_size}
-  maxsize: ${swap_size}
+  size: ${swap}
+  maxsize: ${swap}
 %{ endif ~}
 
-%{ if length(disk_mounts) > 0 ~}
-mounts: ${jsonencode(disk_mounts)}
+%{ if length(mounts) > 0 ~}
+mounts: ${jsonencode(mounts)}
 %{ endif ~}
 
 write_files:
@@ -46,14 +46,14 @@ write_files:
 
 package_update: true
 
-%{ if length(default_bootcmd) + length(bootcmd) + length(disk_bootcmd) > 0 ~}
-bootcmd: ${jsonencode(concat(default_bootcmd, disk_bootcmd, bootcmd))}
+%{ if length(bootcmd) > 0 ~}
+bootcmd: ${jsonencode(bootcmd)}
 %{ endif ~}
 
-%{ if length(default_packages) + length(packages) > 0 ~}
-packages: ${jsonencode(concat(default_packages, packages))}
+%{ if length(length(packages) > 0 ~}
+packages: ${jsonencode(packages)}
 %{ endif ~}
 
-%{ if length(default_runcmd) + length(runcmd) > 0 ~}
-runcmd: ${jsonencode(concat(default_runcmd, runcmd))}
+%{ if length(runcmd) > 0 ~}
+runcmd: ${jsonencode(runcmd)}
 %{ endif ~}

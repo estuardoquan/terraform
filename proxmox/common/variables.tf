@@ -56,7 +56,6 @@ variable "servers" {
     // ACCOUNT
     username = optional(string, "admin")
     packages = optional(list(string), [])
-    bootcmd = optional(list(string), [])
     runcmd = optional(list(string), [])
   }))
 }
@@ -81,27 +80,8 @@ variable "snippet_node" {
   default = "pve-39"
 }
 
-variable "default_bootcmd" {
-  type = list(string)
-  default = [
-    "pv=$(pvs --noheadings -o pv_name -S vg_name=vg0 | tr -d ' ' | head -n 1)",
-    "part=$(basename \"$(readlink -f \"$pv\")\")",
-    "growpart \"/dev/$(basename \"$(readlink -f /sys/class/block/$part/..)\")\" \"$(cat /sys/class/block/$part/partition)\" || true",
-    "[ \"$(vgs --noheadings -o vg_free_count vg0 | tr -d ' ')\" -gt 0 ] && lvextend -r -l +100%FREE vg0/lv_root || true",
-  ]
-}
-
 variable "default_packages" {
   type = list(string)
   default = []
 }
 
-variable "default_runcmd" {
-  type = list(string)
-  default = []
-}
-
-variable "default_vg" {
-  type = string
-  default = "vg0"
-}
