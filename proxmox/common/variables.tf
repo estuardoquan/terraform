@@ -22,7 +22,7 @@ variable "servers" {
         size = optional(string, "100%")
     }), {
       "lv_root" = {}
-    }),{
+    })),{
       "scsi0" = {
         size = 4
       }
