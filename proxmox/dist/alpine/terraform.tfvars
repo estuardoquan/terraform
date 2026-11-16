@@ -21,14 +21,21 @@ servers = {
                 size = 4
             }
             "scsi1" = {
-                mount = "/home"
-                size = 2
                 store = "vm"
-            }
-            "scsi2" = {
-                mount = "/var/lib/docker"
-                size = 4
-                store = "vm"
+                size = 8
+                lvm = {
+                    vg = "vg1"
+                    lv = {
+                        "lv_home" = {
+                            mount = "/home"
+                            size = "25%"
+                        }
+                        "lv_docker" = {
+                            mount = "/var/lib/docker"
+                            size = "100%"
+                        }
+                    }
+                }
             }
         }
         packages = [
