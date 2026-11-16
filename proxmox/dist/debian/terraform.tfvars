@@ -35,7 +35,6 @@ servers = {
         packages = [
             "podman",
         ]
-        runcmd = ["systemctl mask tmp.mount"]
     }
 }
 
