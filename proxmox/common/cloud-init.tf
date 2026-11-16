@@ -5,7 +5,7 @@ locals {
   bootcmd = {
     for name, server in var.servers : name => [
       for k, v in server.disks :
-      "/usr/local/sbin/lvm-bootcmd.sh ${k} ${v.lvm.vg} ${join(" ", [for lv, o in v.lvm.lv : "${lv}=${o.size}"])}"
+      "sh -s ${k} ${v.lvm.vg} ${join(" ", [for lv, o in v.lvm.lv : "${lv}=${o.size}"])} <<'EOF'\n${file("${path.module}/../../common/lvm-bootcmd.sh")}EOF"
     ]
   }
   mounts = {
