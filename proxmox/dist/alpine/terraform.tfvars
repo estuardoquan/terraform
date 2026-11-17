@@ -42,6 +42,9 @@ servers = {
             "docker",
             "docker-cli-compose",
         ]
+        runcmd = [
+            "rc-update add docker default",
+        ]
     }
 }
 
