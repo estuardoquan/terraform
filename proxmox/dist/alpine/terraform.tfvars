@@ -44,6 +44,7 @@ servers = {
         ]
         runcmd = [
             "rc-update add docker default",
+            "rc-service docker start",
         ]
     }
 }
