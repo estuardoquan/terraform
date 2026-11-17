@@ -39,6 +39,7 @@ servers = {
 }
 
 default_packages = [
+    "git",
     "neovim",
     "nodejs",
     "npm",

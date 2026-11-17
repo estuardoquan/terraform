@@ -52,6 +52,7 @@ servers = {
 default_packages = [
     "build-base",
     "clang-extra-tools",
+    "git",
     "lua-language-server",
     "neovim",
     "nodejs",
