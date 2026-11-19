@@ -9,7 +9,7 @@ servers = {
         cpu = {
             cores = 2
         }
-        address = "10.10.0.79"
+        address = "10.10.0.1"
         nameservers = ["10.10.0.254"]
         net = {
             bridge = "vmbr0"
