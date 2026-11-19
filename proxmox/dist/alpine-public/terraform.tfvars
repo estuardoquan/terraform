@@ -10,11 +10,11 @@ servers = {
             cores = 2
         }
         domain = "public"
-        address = "10.30.0.99"
-        nameservers = ["10.30.0.254"]
+        address = "10.255.255.99"
+        nameservers = ["10.255.255.254"]
         net = {
             bridge = "vxlan0"
-            gateway = "10.30.0.254"
+            gateway = "10.255.255.254"
         }
         datastore = "vm"
         disks = {
@@ -56,11 +56,11 @@ servers = {
             cores = 2
         }
         domain = "public"
-        address = "10.30.0.98"
-        nameservers = ["10.30.0.254"]
+        address = "10.255.255.98"
+        nameservers = ["10.255.255.254"]
         net = {
             bridge = "vxlan0"
-            gateway = "10.30.0.254"
+            gateway = "10.255.255.254"
         }
         datastore = "vm"
         disks = {
