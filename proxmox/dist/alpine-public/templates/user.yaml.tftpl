@@ -1,0 +1,56 @@
+#cloud-config
+hostname: ${hostname}
+fqdn: ${hostname}
+manage_etc_hosts: true
+
+users:
+  - name: ${username}
+    groups: [docker, wheel]
+    shell: /bin/bash
+    lock_passwd: true
+    ssh_authorized_keys:
+      - ${ssh_public_key}
+
+%{ if swap != "" ~}
+swap:
+  filename: /swapfile
+  size: ${swap}
+  maxsize: ${swap}
+%{ endif ~}
+
+%{ if length(mounts) > 0 ~}
+mounts: ${jsonencode(mounts)}
+%{ endif ~}
+
+write_files:
+  - path: /home/${username}/.ssh/id_ed25519
+    permissions: "0600"
+    owner: ${username}:${username}
+    defer: true
+    content: |
+      ${indent(6, github_private_key)}
+  - path: /home/${username}/.ssh/id_ed25519.pub
+    permissions: "0644"
+    owner: ${username}:${username}
+    defer: true
+    content: |
+      ${github_public_key}
+
+manage_resolv_conf: true
+
+resolv_conf:
+  nameservers: ${jsonencode(nameservers)}
+
+package_update: true
+
+%{ if length(bootcmd) > 0 ~}
+bootcmd: ${jsonencode(bootcmd)}
+%{ endif ~}
+
+%{ if length(packages) > 0 ~}
+packages: ${jsonencode(packages)}
+%{ endif ~}
+
+%{ if length(runcmd) > 0 ~}
+runcmd: ${jsonencode(runcmd)}
+%{ endif ~}
