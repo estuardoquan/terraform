@@ -15,13 +15,12 @@ servers = {
             bridge = "vmbr0"
             gateway = "10.10.0.254"
         }
+        datastore = "vm"
         disks = {
             "scsi0" = {
-                store = "vm"
                 size = 4
             }
             "scsi1" = {
-                store = "vm"
                 size = 8
                 lvm = {
                     vg = "vg1"
@@ -62,13 +61,12 @@ servers = {
             bridge = "vxlan0"
             gateway = "10.30.0.254"
         }
+        datastore = "vm"
         disks = {
             "scsi0" = {
-                store = "vm"
                 size = 4
             }
             "scsi1" = {
-                store = "vm"
                 size = 8
                 lvm = {
                     vg = "vg1"
@@ -109,13 +107,12 @@ servers = {
             bridge = "vxlan0"
             gateway = "10.30.0.254"
         }
+        datastore = "vm"
         disks = {
             "scsi0" = {
-                store = "vm"
                 size = 4
             }
             "scsi1" = {
-                store = "vm"
                 size = 8
                 lvm = {
                     vg = "vg1"

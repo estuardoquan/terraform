@@ -10,13 +10,9 @@ variable "servers" {
       cores = optional(number, 2)
       type = optional(string, "x86-64-v2-AES")
     }),{})
-    efi = optional(object({
-      store = optional(string, "local-lvm")
-      size = optional(string, "4m")
-    }), {})
-     disks = optional(map(object({
+    datastore = optional(string, "local-lvm")
+    disks = optional(map(object({
       size = optional(number, 2)
-      store = optional(string, "local-lvm")
       lvm = optional(object({
         vg = optional(string, "vg0")
         lv = optional(map(object({

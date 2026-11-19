@@ -27,7 +27,7 @@ resource "proxmox_virtual_environment_vm" "default" {
     for_each = each.value.disks
     content {
       interface         = disk.key
-      datastore_id      = disk.value.store
+      datastore_id      = each.value.datastore
       size              = disk.value.size
       discard           = "on"
       ssd               = true
@@ -42,6 +42,8 @@ resource "proxmox_virtual_environment_vm" "default" {
   }
 
   initialization {
+    datastore_id = each.value.datastore
+
     ip_config {
       ipv4 {
         address = "${each.value.address}/${each.value.net.prefix}"
@@ -68,8 +70,8 @@ resource "proxmox_virtual_environment_vm" "default" {
   bios    = "ovmf"
 
   efi_disk {
-    datastore_id = each.value.efi.store
-    type         = each.value.efi.size
+    datastore_id = each.value.datastore
+    type         = "4m" 
   }
 
   lifecycle {
